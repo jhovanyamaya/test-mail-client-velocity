@@ -18,6 +18,9 @@
 ## Content
 #header()
 <p>Something</p>
-<p>Algo antes <a>https://algo.com/algo-mas</a> algo después</p>
+<p>Something before https://domain.com/context something after</p>
+<p>Something before <a>https://domain.com/context</a> something after</p>
+<p>Something before something@domain.com something after</p>
+<p>Something before <a>something@domain.com</a> something after</p>
 <p>Something</p>
 #footer()
