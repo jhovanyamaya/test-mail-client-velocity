@@ -36,6 +36,28 @@ public class Main {
             password = input.next();
         }
 
+        Session session = getDefaultInstance(buildProperties(host, port, tls, from), getAuthenticator(from, password));
+        session.setDebug(true);
+
+        Transport.send(buildMessage(to, from, session));
+        System.out.println("SUCCESS");
+    }
+
+    private static MimeMessage buildMessage(String to, String from, Session session) throws MessagingException {
+        MimeMessage message = new MimeMessage(session);
+        if (from != null) {
+            message.setFrom(new InternetAddress(from));
+        }
+        message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+        message.setSubject("Subject");
+
+        String bodyFromTemplate = getBodyFromTemplate();
+        message.setContent(bodyFromTemplate, "text/html");
+        System.out.println(bodyFromTemplate);
+        return message;
+    }
+
+    private static Properties buildProperties(String host, String port, String tls, String from) {
         Properties properties = new Properties();
 
         properties.put("mail.smtp.host", host);
@@ -49,23 +71,7 @@ public class Main {
             properties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
             properties.put("mail.smtp.socketFactory.fallback", "false");
         }
-
-        Session session = getDefaultInstance(properties, getAuthenticator(from, password));
-        session.setDebug(true);
-
-        MimeMessage message = new MimeMessage(session);
-        if (from != null) {
-            message.setFrom(new InternetAddress(from));
-        }
-        message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-        message.setSubject("Subject");
-
-        String bodyFromTemplate = getBodyFromTemplate();
-        message.setContent(bodyFromTemplate, "text/html");
-        System.out.println(bodyFromTemplate);
-
-        Transport.send(message);
-        System.out.println("SUCCESS");
+        return properties;
     }
 
     private static String getBodyFromTemplate() {
