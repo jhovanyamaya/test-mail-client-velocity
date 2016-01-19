@@ -2,7 +2,7 @@ package com.s4n.util.mail;
 
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
-import org.apache.velocity.app.Velocity;
+import org.apache.velocity.app.VelocityEngine;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -12,7 +12,7 @@ import java.io.Writer;
 import java.util.Properties;
 import java.util.Scanner;
 
-import static javax.mail.Session.*;
+import static javax.mail.Session.getDefaultInstance;
 
 public class Main {
 
@@ -75,13 +75,17 @@ public class Main {
     }
 
     private static String getBodyFromTemplate() {
-        Velocity.init();
-        Template t = Velocity.getTemplate("./src/main/resources/test-mail.vm");
+        Properties props = new Properties();
+        props.setProperty("resource.loader", "class");
+        props.setProperty("class.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
 
-        VelocityContext ctx = new VelocityContext();
+        VelocityEngine engine = new VelocityEngine(props);
+        VelocityContext context = new VelocityContext();
+        engine.init();
 
+        Template template = engine.getTemplate("test-mail.vm");
         Writer writer = new StringWriter();
-        t.merge(ctx, writer);
+        template.merge(context, writer);
 
         return writer.toString();
     }
