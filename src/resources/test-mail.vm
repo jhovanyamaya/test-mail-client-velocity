@@ -1,0 +1,26 @@
+#macro(header)
+<body style="background-color:#FAFAFA;color: #333333;font-size: 14px;margin: 0;padding: 0;">
+<div style="background: #ffffff;width: 560px;margin: 0 auto;padding: 20px;">
+    <p>
+        <img alt="Public image"
+             src="https://agenciapublicadeempleo.sena.edu.co/PublishingImages/Paginas/ConvocatoriaCajeroBancolombia/Logo%20Bancolombia.jpg">
+    </p>
+    <p><strong>Something strong</strong> Other thing</p>
+#end
+
+#macro(footer)
+    <p>Something</p>
+    <p style="font-size: 12px; color: #666; font-style: italic;">Disclaimer with style</p>
+</div>
+</body>
+#end
+
+## Content
+#header()
+<p>Something</p>
+<p>Something before https://domain.com/context something after</p>
+<p>Something before <a>https://domain.com/context</a> something after</p>
+<p>Something before something@domain.com something after</p>
+<p>Something before <a>something@domain.com</a> something after</p>
+<p>Something</p>
+#footer()
