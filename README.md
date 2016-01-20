@@ -13,6 +13,7 @@ java -jar target/MailClient-1.0-SNAPSHOT.jar smtp.gmail.com 465 jhovanyamaya@sev
 
 ## Versions
 ### master
-Mail client that use velocity templates (more dependencies)
-### without-velocity
 Simple mail client
+
+### with-velocity
+Mail client that use velocity templates (more dependencies)
