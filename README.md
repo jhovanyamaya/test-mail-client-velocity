@@ -10,3 +10,9 @@ Example:
 ```
 java -jar target/MailClient-1.0-SNAPSHOT.jar smtp.gmail.com 465 jhovanyamaya@seven4n.com true pruebas4n@gmail.com
 ```
+
+## Versions
+### master
+Mail client that use velocity templates (more dependencies)
+### without-velocity
+Simple mail client
