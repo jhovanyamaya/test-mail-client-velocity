@@ -1,14 +1,8 @@
 package com.s4n.util.mail;
 
-import org.apache.velocity.Template;
-import org.apache.velocity.VelocityContext;
-import org.apache.velocity.app.VelocityEngine;
-
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
-import java.io.StringWriter;
-import java.io.Writer;
 import java.util.Properties;
 import java.util.Scanner;
 
@@ -50,10 +44,7 @@ public class Main {
         }
         message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
         message.setSubject("Subject");
-
-        String bodyFromTemplate = getBodyFromTemplate();
-        message.setContent(bodyFromTemplate, "text/html");
-        System.out.println(bodyFromTemplate);
+        message.setContent("<h2>Body</h2>", "text/html");
         return message;
     }
 
@@ -72,22 +63,6 @@ public class Main {
             properties.put("mail.smtp.socketFactory.fallback", "false");
         }
         return properties;
-    }
-
-    private static String getBodyFromTemplate() {
-        Properties props = new Properties();
-        props.setProperty("resource.loader", "class");
-        props.setProperty("class.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");
-
-        VelocityEngine engine = new VelocityEngine(props);
-        VelocityContext context = new VelocityContext();
-        engine.init();
-
-        Template template = engine.getTemplate("test-mail.vm");
-        Writer writer = new StringWriter();
-        template.merge(context, writer);
-
-        return writer.toString();
     }
 
     private static Authenticator getAuthenticator(final String from, final String password) {
