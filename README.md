@@ -1,5 +1,5 @@
-# test-mail-client-velocity
-Java client for test email sending with Velocity templates.
+# test-mail-client
+Java client for test email sending. Optionally with Velocity templates (see versions below).
 
 ## Run
 ```
